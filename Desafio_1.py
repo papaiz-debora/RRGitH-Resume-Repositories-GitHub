@@ -14,6 +14,10 @@ JSONContent = requests.get(url)
 
 #CONVERTER PARA FORMATO JSON/DICTIONARY
 content = JSONContent.json()
+
+#SALVAR CONTENT EM CSV
+pd.DataFrame(content).to_csv('github_repositorio.csv', index=False)
+
 #VERIFICAR KEYS DO DICTIONARY (DADOS ESTÃO NA KEY = ‘ITEMS’)
 content.keys()
 
@@ -27,6 +31,10 @@ for id in content['items']:
 #MONTAR DATAFRAME COM NOME DE COLUNAS E VALORES 
 df = pd.DataFrame(pop, columns=['id', 'name', 'stargazers_count'])
 print(df)
+
+#SALVAR DATAFRAME EM CSV
+df.to_csv('stargazersCount_repositorios.csv')
+
 #ANALISE ESTATISTICA DESCRITIVA
 summary = df.describe(include= "all")
 print(summary)
